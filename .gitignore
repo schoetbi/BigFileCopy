@@ -1,0 +1,7 @@
+*.o
+*~
+*.dat
+*.dat.hc
+test
+bfcp
+
