@@ -1,3 +1,4 @@
+.PHONY: runtest
 
 bfcp: bfcp.o
 	g++ -o bfcp bfcp.o -lcrypto -lssl -lboost_filesystem -lboost_system
@@ -10,8 +11,6 @@ checksumfile.o: checksumfile.cpp
 
 test: checksumfile.o test_main.o
 	g++ -o $@ $? -lcrypto -lssl -lboost_filesystem -lboost_system
-
-.PHONY: runtest
 
 runtest: test
 	./test

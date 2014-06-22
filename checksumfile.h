@@ -14,9 +14,10 @@ class Chunk
 		string hash;
 	
 	public:
-		Chunk(unsigned long off, bool equal)
+		Chunk(unsigned long off, string hash_value, bool equal = false)
 		{
 			offset = off;
+      hash = hash;
 			isEqual = equal;
 		}
 			
@@ -34,6 +35,7 @@ class CheckSumFile
 	public:
 		CheckSumFile(string fn);
 		void Write();
+		vector<Chunk> Read();
 		vector<Chunk> Verify();
 		const path HashFileName() { return hashFilename; }
 

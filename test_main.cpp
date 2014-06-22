@@ -4,36 +4,53 @@
 #include "checksumfile.h"
 
 #include <fstream>
+const string testFileName("data.dat");
+
+void WriteTestFile()
+{
+	const int SIZE = 1024;
+	char testData[SIZE];
+	for (int i = 0; i < SIZE; i++)
+	{
+		testData[i] = i % 255;
+	}
+
+	ofstream testFile(testFileName.c_str(), ios::out | ios::binary);
+	testFile.write(testData, SIZE);
+}
 
 BOOST_AUTO_TEST_SUITE (bfcptest) 
 
 BOOST_AUTO_TEST_CASE( writeCheckSumFile )
 {
-		const int SIZE = 1024;
-		char testData[SIZE];
-		for (int i = 0; i < SIZE; i++)
-		{
-			testData[i] = i % 255;
-		}
+	WriteTestFile();
+	CheckSumFile csf(testFileName);
+	csf.ChunkSize(15);
 
-		const string testFileName("data.dat");
+	path hashFile("data.dat.hc");
+	if (exists(hashFile))
+	{
+		remove(hashFile);
+	}
+	csf.Write();
 
-		{
-			ofstream testFile(testFileName.c_str(), ios::out | ios::binary);
-			testFile.write(testData, SIZE);
-		}
-		
-		CheckSumFile csf(testFileName);
-		csf.ChunkSize(15);
-		
-		path hashFile("data.dat.hc");
-		if (exists(hashFile))
-		{
-			remove(hashFile);
-		}
-		csf.Write();
-		
-		BOOST_CHECK (exists(hashFile));		
+	BOOST_CHECK (exists(hashFile));		
+}
+
+BOOST_AUTO_TEST_CASE( readCheckSumFile )
+{
+	WriteTestFile();
+	CheckSumFile csf(testFileName);
+	csf.ChunkSize(200);
+
+	path hashFile("data.dat.hc");
+	if (exists(hashFile))
+	{
+		remove(hashFile);
+	}
+  csf.Write();
+	vector<Chunk> chunks = csf.Read();
+	BOOST_CHECK(chunks.size() == 6);
 }
 
 BOOST_AUTO_TEST_SUITE_END( )

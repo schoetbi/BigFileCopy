@@ -56,6 +56,50 @@ void CheckSumFile::Write()
 	}
 }
 
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+    std::stringstream ss(s);
+    std::string item;
+    while (std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
+
+
+std::vector<std::string> split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
+    split(s, delim, elems);
+    return elems;
+}
+
+vector<Chunk> CheckSumFile::Read()
+{
+	vector<Chunk> chunks;
+
+	ifstream chunkFile(hashFilename.c_str());
+	if (!chunkFile.is_open())
+	{
+		return chunks;
+	}
+
+	string line;
+	getline(chunkFile, line); // size
+
+  while(getline(chunkFile, line))
+  {
+		vector<string> splitted;
+		split(line, ':', splitted);
+		if (splitted.size() == 2)
+		{
+			unsigned long offset;
+			istringstream offsetStream(splitted[0]);
+			offsetStream >> offset;
+			Chunk c(offset, splitted[1]);
+			chunks.push_back(c);
+    }
+  }
+}
+
 void CheckSumFile::ChunkSize(long cs)
 {
 	chunkSize = cs;
