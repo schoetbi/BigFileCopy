@@ -35,6 +35,7 @@ class CheckSumFile
 		CheckSumFile(string fn);
 		void Write();
 		vector<Chunk> Verify();
+		const path HashFileName() { return hashFilename; }
 
 		void ChunkSize(long cs);
 };

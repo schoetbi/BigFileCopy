@@ -24,8 +24,16 @@ BOOST_AUTO_TEST_CASE( writeCheckSumFile )
 		}
 		
 		CheckSumFile csf(testFileName);
-		csf.ChunkSize(128);
+		csf.ChunkSize(15);
+		
+		path hashFile("data.dat.hc");
+		if (exists(hashFile))
+		{
+			remove(hashFile);
+		}
 		csf.Write();
+		
+		BOOST_CHECK (exists(hashFile));		
 }
 
 BOOST_AUTO_TEST_SUITE_END( )
