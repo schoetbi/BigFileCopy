@@ -6,8 +6,12 @@ bfcp: bfcp.o
 	g++ -c -o $@ $<
 
 checksumfile.o: checksumfile.cpp
-	g++ -c -D BOOST_TEST_MAIN -o $@ $<
+	g++ -c -o $@ $<
 
 test: checksumfile.o test_main.o
 	g++ -o $@ $? -lcrypto -lssl -lboost_filesystem -lboost_system
 
+.PHONY: runtest
+
+runtest: test
+	./test
