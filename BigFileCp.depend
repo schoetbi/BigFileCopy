@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1403551640 source:/home/tobias/dev/bigfilecp/test_main.cpp
+	<boost/test/unit_test.hpp>
+	"checksumfile.h"
+	<fstream>
+
+1403551828 /home/tobias/dev/bigfilecp/checksumfile.h
+	<boost/filesystem.hpp>
+	<vector>
+	<string>
+
+1403551759 source:/home/tobias/dev/bigfilecp/checksumfile.cpp
+	"checksumfile.h"
+	<fstream>
+	<iomanip>
+	<sstream>
+	<openssl/sha.h>
+
