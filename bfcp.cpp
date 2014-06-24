@@ -1,6 +1,5 @@
 #include <iostream>
 
- 
 using namespace std;
 
 int main(int argc, char **argv)
@@ -20,6 +19,6 @@ int main(int argc, char **argv)
 
 	cout << "creating hash file for " << in.string() << endl;
 	createHashFile(in);
-	
-	
+
+
 }
