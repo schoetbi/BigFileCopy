@@ -36,6 +36,11 @@ vector<Chunk> CheckSumFile::WriteHashFile()
 {
     vector<Chunk> chunks = CalcHashes();
 
+    if (chunks.size() == 0)
+    {
+        return chunks;
+    }
+
     ofstream hashFile(hashFilename.c_str());
     uintmax_t size = file_size(filename);
     hashFile << "size:" << size << endl;
@@ -67,6 +72,7 @@ vector<Chunk> CheckSumFile::CalcHashes()
     uintmax_t size = file_size(filename);
     while (pos < size)
     {
+        cout << "hash: " << pos << "/" << pos * 100 / size  << "%"<< endl;
         long bytesToRead = min(size - pos, chunkSize);
         file.read(chunk, bytesToRead);
         string hash = GetHash(chunk, bytesToRead);
