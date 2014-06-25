@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Test" />
-	<File name="bfcp.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="19" topLine="0" />
+	<ActiveTarget name="Debug" />
+	<File name="bfcp.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="826" topLine="1" />
 	</File>
 	<File name="checksumfile.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="1994" topLine="78" />
+		<Cursor position="1529" topLine="75" />
 	</File>
 	<File name="checksumfile.h" open="1" top="0" tabpos="1">
-		<Cursor position="985" topLine="41" />
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="test_main.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="1391" topLine="1" />
+	<File name="test_main.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="439" topLine="12" />
 	</File>
 </CodeBlocks_layout_file>
