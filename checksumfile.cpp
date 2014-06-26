@@ -186,6 +186,7 @@ void CheckSumFile::UpdateSnapshot(string snapshotFileName)
     vector<Chunk> localChunks = WriteHashFile();
     if (!exists(targetFile) || !exists(targetHashFile))
     {
+        cout << "doing raw copy since there is no update file" << endl;
         copy_file (filename, targetFile, copy_option::overwrite_if_exists);
         copy_file (hashFilename, targetHashFile, copy_option::overwrite_if_exists);
         return;
@@ -206,13 +207,17 @@ void CheckSumFile::UpdateSnapshot(string snapshotFileName)
         char chunk[chunkSize];
         for (unsigned long c = 0; c < chunkCount; ++c)
         {
-            if (targetChunks[c].Hash() == localChunks[c].Hash())
+            const Chunk& localChunk = localChunks[c];
+            if (targetChunks[c].Hash() == localChunk.Hash())
             {
+                cout << '.';
                 continue;
             }
 
             // write contents of local file to target file at the same position
-            unsigned long offset = localChunks[c].Offset();
+            unsigned long offset = localChunk.Offset();
+            cout << "updating at offset " << offset;
+
             ifstream src(filename.c_str(), ios::in | ios::binary);
             src.seekg(offset, ios::beg);
             src.read(chunk, chunkSize);
@@ -222,7 +227,7 @@ void CheckSumFile::UpdateSnapshot(string snapshotFileName)
             file.seekg(offset, ios::beg);
             file.write(chunk, chunkSize);
             file.close();
-
+            cout << "ok" << endl;
             // todo: update target patchfile with new hash for current offset
         }
 

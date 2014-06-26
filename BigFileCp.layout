@@ -2,10 +2,10 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="bfcp.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="826" topLine="1" />
+		<Cursor position="1005" topLine="33" />
 	</File>
 	<File name="checksumfile.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="1529" topLine="75" />
+		<Cursor position="4793" topLine="189" />
 	</File>
 	<File name="checksumfile.h" open="1" top="0" tabpos="1">
 		<Cursor position="0" topLine="0" />
