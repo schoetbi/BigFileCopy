@@ -49,6 +49,7 @@ private:
 public:
     CheckSumFile(string fn);
     vector<Chunk> WriteHashFile();
+    void WriteHashFile(const vector<Chunk> &chunks);
     vector<Chunk> CalcHashes();
     vector<Chunk> Read();
     vector<Chunk> Read(string chunkFileName);
